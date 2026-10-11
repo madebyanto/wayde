@@ -1,0 +1,27 @@
+[package]
+name = "wayde"
+version = "0.1.0"
+edition = "2021"
+description = "Minimal tiling Wayland compositor built on smithay"
+license = "MIT"
+
+[[bin]]
+name = "wayde"
+path = "wayde.rs"
+
+[dependencies]
+smithay = { version = "=0.7.0", default-features = false, features = ["desktop", "wayland_frontend", "backend_winit"] }
+serde = { version = "=1.0.219", features = ["derive"] }
+toml = "=0.8.23"
+log = "=0.4.27"
+env_logger = { version = "=0.11.8", default-features = false, features = ["humantime"] }
+thiserror = "=2.0.12"
+libc = "=0.2.180"
+calloop = { version = "=0.14.5", features = ["signals"] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "unwind"
+strip = true
